@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: ${MYSQL_DATABASE_URL}/gbs_db
+    username: ${MYSQL_DATABASE_USERNAME}
+    password: ${MYSQL_DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+    format:
+      date: yyyy-MM-dd
