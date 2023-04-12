@@ -22,4 +22,13 @@ public interface EmployeeService {
      * Method to view all employees.
      */
     List<Employee> retrieveAll();
+
+    /**
+     * Method to validate if the Employee is already existing.
+     * @param firstName - first name
+     * @param middleName - middle name
+     * @param lastName - last name
+     * @return - True if already existing
+     */
+    boolean isEmployeeExisting(String firstName, String middleName, String lastName);
 }

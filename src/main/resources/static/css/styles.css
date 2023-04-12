@@ -12,6 +12,7 @@
 	--DARK_BLUE: #262e36;
 	--HEADER_SHADOW: 0 5px 15px #181818;
 	--FORM_SHADOW: -5px 10px 10px #181818;
+	--TABLE_HEAD_SHADOW: 0 1px 5px #181818;
 }
 
 a {
@@ -68,6 +69,7 @@ a:hover {
 	color: whitesmoke;
 }
 
+/* Form */
 .employee-form {
 	display: flex;
 	flex-direction: column;
@@ -108,6 +110,7 @@ input:focus {
 	cursor: pointer;
 }
 
+/* Messages */
 .error {
 	color: #fc7b7b;
 	background-color: var(--DARK_BLUE);
@@ -122,6 +125,46 @@ input:focus {
 	display: block;
 	width: 100vw;
 	text-align: center;
+	margin-top: 2rem;
+}
+
+/* Table */
+.table-container {
+	width: 90vw;
+	height: 90vh;
+	margin: 1.5rem;
+	overflow-y: auto;
+}
+
+.employee-table {
+	border-collapse: collapse;
+	width: 100%;
+	border: 1px solid whitesmoke;
+}
+
+.employee-table thead {
+	background-color: var(--DARK_BLUE);
+	position: sticky;
+	top: 0;
+	box-shadow: var(--TABLE_HEAD_SHADOW);
+}
+
+.employee-table th,
+.employee-table td {
+	border: 1px solid whitesmoke;
+	padding: 0.4rem;
+}
+
+.employee-table th {
+	font-weight: bold;
+}
+
+.employee-table tbody tr:nth-child(odd) {
+	background-color: #2f3a44;
+}
+
+.employee-table tbody tr:nth-child(even) {
+	background-color: #42515f;
 }
 
 /* Footer */

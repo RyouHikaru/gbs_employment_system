@@ -2,6 +2,7 @@ package com.tapioca.controller;
 
 import com.tapioca.entity.Employee;
 import com.tapioca.service.EmployeeService;
+import com.tapioca.utils.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,9 +40,19 @@ public class EntityController {
             }
         }
 
+        if (employeeService.isEmployeeExisting(employee.getFirstName(), employee.getMiddleName(), employee.getLastName())) {
+            model.addAttribute("errorMessage", ErrorMessage.EMPLOYEE_EXISTS.getMessage());
+            return "add-employee";
+        }
+
         employeeService.create(employee);
-        return "redirect:/?saveEmployeeSuccess";
+        return "redirect:/employee/list/?success";
     }
 
+    @GetMapping("/employee/list")
+    public String displayEmployeeListPage(Model model) {
+        model.addAttribute("employees", employeeService.retrieveAll());
+        return "view-employees";
+    }
 
 }

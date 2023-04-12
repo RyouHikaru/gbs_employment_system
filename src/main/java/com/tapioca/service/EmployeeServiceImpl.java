@@ -24,7 +24,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> retrieveAll() {
-        return null;
+        return repository.findAll();
+    }
+
+    @Override
+    public boolean isEmployeeExisting(String firstName, String middleName, String lastName) {
+        return repository.existsByFirstNameAndMiddleNameAndLastName(firstName, middleName, lastName);
     }
 
 }
