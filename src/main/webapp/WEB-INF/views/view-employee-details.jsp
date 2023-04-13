@@ -10,7 +10,7 @@
             <span><p class="error">${errorMessage}</p></span>
         </c:if>
         <form:form modelAttribute="employee" class="employee-form" method="post" action="/employees/save">
-            <h4>New Employee</h4>
+            <h4>View/Edit Employee</h4>
             <input type="hidden" name="id" value="${employee.id}">
             <input type="text" id="firstName" name="firstName" value="${employee.firstName}" placeholder="First Name">
             <input type="text" id="middleName" name="middleName" value="${employee.middleName}" placeholder="Middle Name (Optional)">

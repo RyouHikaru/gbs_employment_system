@@ -111,6 +111,10 @@ input:focus {
 }
 
 /* Messages */
+.message {
+	margin-top: 2rem;
+}
+
 .error {
 	color: #fc7b7b;
 	background-color: var(--DARK_BLUE);
@@ -125,7 +129,6 @@ input:focus {
 	display: block;
 	width: 100vw;
 	text-align: center;
-	margin-top: 2rem;
 }
 
 /* Table */
@@ -165,6 +168,10 @@ input:focus {
 
 .employee-table tbody tr:nth-child(even) {
 	background-color: #42515f;
+}
+
+.employee-table td:nth-child(5) {
+	text-align: center;
 }
 
 /* Footer */

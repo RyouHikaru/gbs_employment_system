@@ -7,21 +7,22 @@ import java.util.List;
 public interface EmployeeService {
 
     /**
-     * Method to create a new employee.
-     * @param employee - the Employee to be added.
+     * Method to save a new or existing Employee.
+     * @param employee - the Employee to be saved.
      */
-    void create(Employee employee);
-
-    /**
-     * Method to update an existing employee.
-     * @param employee - the Employee to be updated.
-     */
-    void update(Employee employee);
+    void save(Employee employee);
 
     /**
      * Method to view all employees.
      */
     List<Employee> retrieveAll();
+
+    /**
+     * Method to view one employee by ID.
+     * @param id - id of the Employee.
+     * @return - The retrieved Employee.
+     */
+    Employee retrieveEmployeeById(Long id);
 
     /**
      * Method to validate if the Employee is already existing.
