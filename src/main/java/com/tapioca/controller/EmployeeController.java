@@ -2,20 +2,18 @@ package com.tapioca.controller;
 
 import com.tapioca.entity.Employee;
 import com.tapioca.service.EmployeeService;
+import com.tapioca.utils.EmployeeSearchCriteria;
 import com.tapioca.utils.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @Controller
-public class EntityController {
+public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
@@ -51,8 +49,13 @@ public class EntityController {
     }
 
     @GetMapping("/employees/list")
-    public String displayEmployeeListPage(Model model) {
-        model.addAttribute("employees", employeeService.retrieveAll());
+    public String displayEmployeeListSearchResults(@RequestParam(value = "firstName", required = false, defaultValue = "") String firstName,
+                                                   @RequestParam(value = "lastName", required = false, defaultValue = "") String lastName,
+                                                   @RequestParam(value = "position", required = false, defaultValue = "") String position,
+                                                   Model model) {
+        EmployeeSearchCriteria criteria = new EmployeeSearchCriteria(firstName, lastName, position);
+        model.addAttribute("search", criteria);
+        model.addAttribute("employees", employeeService.retrieveEmployeeBySearchCriteria(criteria));
         return "view-employees";
     }
 

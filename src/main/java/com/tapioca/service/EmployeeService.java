@@ -1,6 +1,7 @@
 package com.tapioca.service;
 
 import com.tapioca.entity.Employee;
+import com.tapioca.utils.EmployeeSearchCriteria;
 
 import java.util.List;
 
@@ -13,9 +14,11 @@ public interface EmployeeService {
     void save(Employee employee);
 
     /**
-     * Method to view all employees.
+     * Method to view all employees by search criteria
+     * @param criteria - search criteria of Employee
+     * @return - the list of Employees matching the criteria
      */
-    List<Employee> retrieveAll();
+    List<Employee> retrieveEmployeeBySearchCriteria(EmployeeSearchCriteria criteria);
 
     /**
      * Method to view one employee by ID.

@@ -2,6 +2,7 @@ package com.tapioca.service;
 
 import com.tapioca.entity.Employee;
 import com.tapioca.repository.EmployeeRepository;
+import com.tapioca.utils.EmployeeSearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> retrieveAll() {
-        return repository.findAll();
+    public List<Employee> retrieveEmployeeBySearchCriteria(EmployeeSearchCriteria criteria) {
+        return repository.findBySearchCriteria(criteria.getFirstName(), criteria.getLastName(), criteria.getPosition());
     }
 
     @Override
