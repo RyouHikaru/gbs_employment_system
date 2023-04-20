@@ -22,5 +22,6 @@
     <footer class="footer">
         <p>&copy; All Rights Reserved, 2023</p>
     </footer>
+    <script src="/js/index.js"></script>
 </body>
 </html>

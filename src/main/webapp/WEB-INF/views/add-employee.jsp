@@ -17,7 +17,10 @@
             <input type="text" id="lastName" name="lastName" value="${employee.lastName}" placeholder="Last Name">
             <input type="date" id="birthDate" name="birthDate" max="2100-12-31" value="${employee.birthDate}">
             <input type="text" id="position" name="position" value="${employee.position}" placeholder="Position">
-            <button class="submit-btn" type="submit">Save</button>
+            <div class="button-container full-width">
+                <button class="button" type="button" onClick="returnToList()">Cancel</button>
+                <button class="button submit" type="submit">Save</button>
+            </div>
         </form:form>
     </jsp:body>
 </t:layout>

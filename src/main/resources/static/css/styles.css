@@ -9,7 +9,8 @@
 }
 
 :root {
-    --LIGHT_BLUE: #4c5b6a;
+    --LIGHT_BLUE: #647d8d;
+    --BLUE: #4c5b6a;
 	--DARK_BLUE: #262e36;
 	--HEADER_SHADOW: 0 5px 15px #181818;
 	--FORM_SHADOW: -5px 10px 10px #181818;
@@ -41,7 +42,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--LIGHT_BLUE);
+    background: var(--BLUE);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -113,20 +114,43 @@ a:hover {
 
 .employee-form > input:hover,
 input:focus {
-	border: 4px solid var(--LIGHT_BLUE);
+	border: 4px solid var(--BLUE);
 }
 
-.submit-btn {
-	background-color: var(--LIGHT_BLUE);
+/* Button */
+.button {
+	background-color: var(--BLUE);
 	color: white;
 	border-radius: 0.5rem;
 	border: none;
 	padding: 0.5rem;
-	width: 75%;
+	width: 100%;
 }
 
-.submit-btn:hover {
+.button:hover {
 	background-color: #6b7e91;
+	cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.w-100 {
+    width: 100px;
+}
+
+.submit {
+	background-color: var(--LIGHT_BLUE);
+}
+
+.submit:hover {
+	background-color: #7c9eb5;
 	cursor: pointer;
 }
 
@@ -148,20 +172,7 @@ input:focus {
 
 .search-form > input:hover,
 input:focus {
-	border: 4px solid var(--LIGHT_BLUE);
-}
-
-.search-btn {
-	background-color: var(--LIGHT_BLUE);
-	color: white;
-	border-radius: 0.5rem;
-	border: none;
-	padding: 0.5rem;
-}
-
-.search-btn:hover {
-	background-color: #6b7e91;
-	cursor: pointer;
+	border: 4px solid var(--BLUE);
 }
 
 /* Messages */
@@ -183,6 +194,12 @@ input:focus {
 	display: block;
 	width: 100vw;
 	text-align: center;
+}
+
+.empty {
+    text-align: center;
+    width: 100%;
+    margin-top: 1rem;
 }
 
 /* Table */

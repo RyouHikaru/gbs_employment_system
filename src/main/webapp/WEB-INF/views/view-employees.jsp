@@ -17,8 +17,10 @@
                 <input type="text" id="searchFirstName" name="firstName" value="${search.firstName}" placeholder="First name"/>
                 <input type="text" id="searchLastName" name="lastName" value="${search.lastName}" placeholder="Last name"/>
                 <input type="text" id="searchPosition" name="position"  value="${search.position}" placeholder="Position"/>
-                <button class="search-btn" type="submit">Search</button>
-                <button class="search-btn" type="button" onClick="clearSearch()">Clear</button>
+                <div class="button-container">
+                    <button class="button w-100" type="button" onClick="clearSearch()">Clear</button>
+                    <button class="button submit w-100" type="submit">Search</button>
+                </div>
             </form:form>
             <table class="employee-table">
                 <thead>
@@ -42,20 +44,9 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <c:if test="${employees.size() == 0}">
+                <span><p class="empty">No records found</p></span>
+            </c:if>
         </div>
-        <script>
-            function clearSearch() {
-                document.getElementById("searchFirstName").value = "";
-                document.getElementById("searchLastName").value = "";
-                document.getElementById("searchPosition").value = "";
-                var search = {
-                    firstName: "",
-                    lastName: "",
-                    position: ""
-                };
-                document.querySelector("form").setAttribute("modelAttribute", "search");
-                document.querySelector("form").setAttribute("modelAttribute", JSON.stringify(search));
-            }
-        </script>
     </jsp:body>
 </t:layout>
