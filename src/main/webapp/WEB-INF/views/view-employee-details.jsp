@@ -9,7 +9,7 @@
         <c:if test="${not empty errorMessage}">
             <span><p class="error">${errorMessage}</p></span>
         </c:if>
-        <form:form modelAttribute="employee" class="employee-form" method="post" action="/employees/save">
+        <form:form modelAttribute="employee" class="form" method="post" action="/employees/save">
             <h4>View/Edit Employee</h4>
             <input type="text" name="id" value="${employee.id}" readonly>
             <input type="text" id="firstName" name="firstName" value="${employee.firstName}" placeholder="First Name">

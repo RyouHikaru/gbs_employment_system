@@ -7,9 +7,9 @@
 <t:layout>
     <jsp:body>
         <c:if test="${not empty errorMessage}">
-            <span><p class="error">${errorMessage}</p></span>
+            <span><p class="message error">${errorMessage}</p></span>
         </c:if>
-        <form:form modelAttribute="employee" class="employee-form" method="post" action="/employees/save">
+        <form:form modelAttribute="employee" class="form" method="post" action="/employees/save">
             <h4>New Employee</h4>
             <input type="hidden" name="id" value="${employee.id}">
             <input type="text" id="firstName" name="firstName" value="${employee.firstName}" placeholder="First Name">

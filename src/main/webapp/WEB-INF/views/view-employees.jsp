@@ -7,10 +7,10 @@
 <t:layout>
     <jsp:body>
         <c:if test="${param.success ne null}">
-            <span class="message success">Employee saved</span>
+            <span><p class="message success">Employee saved</p></span>
         </c:if>
         <c:if test="${param.employeeNotFound ne null}">
-            <span class="message error">Employee not found</span>
+            <span><p class="message error">Employee not found</p></span>
         </c:if>
         <div class="table-container">
             <div class="search-container">

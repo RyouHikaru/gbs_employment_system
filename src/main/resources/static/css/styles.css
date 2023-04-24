@@ -88,10 +88,11 @@ a:hover {
 	background-repeat: no-repeat;
 	background-color: #2f3a44;
 	color: whitesmoke;
+	position: relative;
 }
 
 /* Form */
-.employee-form {
+.form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -104,7 +105,7 @@ a:hover {
 	box-shadow: var(--FORM_SHADOW);
 }
 
-.employee-form > input {
+.form > input, .form > select {
 	padding: 0.5rem;
 	border-radius: 0.35rem;
 	border: 4px solid #fff;
@@ -112,8 +113,7 @@ a:hover {
 	width: 100%;
 }
 
-.employee-form > input:hover,
-input:focus {
+.form > input:hover, input:focus {
 	border: 4px solid var(--BLUE);
 }
 
@@ -142,7 +142,7 @@ input:focus {
     width: 125px;
 }
 
-.plus:hover, .plus:active {
+.plus:hover, .plus:focus {
     background-color: #408140;
 }
 
@@ -192,23 +192,21 @@ input:focus {
 
 /* Messages */
 .message {
-	margin-top: 2rem;
+    position: absolute;
+    top: 2%;
+	background-color: var(--DARK_BLUE);
+	display: block;
+	text-align: center;
+	transform: translate(-50%, -50%);
+	width: 100vw;
 }
 
 .error {
 	color: #fc7b7b;
-	background-color: var(--DARK_BLUE);
-	display: block;
-	width: 100vw;
-	text-align: center;
 }
 
 .success {
 	color: #80d67c;
-	background-color: var(--DARK_BLUE);
-	display: block;
-	width: 100vw;
-	text-align: center;
 }
 
 .empty {
@@ -279,7 +277,7 @@ input:focus {
 }
 
 @media (min-width: 768px) {
-	.employee-form {
+	.form {
 		width: 40vw;
 	}
 
@@ -295,7 +293,7 @@ input:focus {
 }
 
 @media (min-width: 1024px) {
-	.employee-form {
+	.form {
 		width: 30vw;
 	}
 }
