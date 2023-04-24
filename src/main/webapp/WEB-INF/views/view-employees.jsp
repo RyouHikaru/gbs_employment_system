@@ -13,15 +13,18 @@
             <span class="message error">Employee not found</span>
         </c:if>
         <div class="table-container">
-            <form:form modelAttribute="search" class="search-form" method="get" action="/employees/list">
-                <input type="text" id="searchFirstName" name="firstName" value="${search.firstName}" placeholder="First name"/>
-                <input type="text" id="searchLastName" name="lastName" value="${search.lastName}" placeholder="Last name"/>
-                <input type="text" id="searchPosition" name="position"  value="${search.position}" placeholder="Position"/>
-                <div class="button-container">
-                    <button class="button w-100" type="button" onClick="clearSearch()">Clear</button>
-                    <button class="button submit w-100" type="submit">Search</button>
-                </div>
-            </form:form>
+            <div class="search-container">
+                <button class="button plus" type="button" title="New employee" onClick="addEmployee()">Add employee</button>
+                <form:form modelAttribute="search" class="search-form" method="get" action="/employees/list">
+                    <input type="text" id="searchFirstName" name="firstName" value="${search.firstName}" placeholder="First name"/>
+                    <input type="text" id="searchLastName" name="lastName" value="${search.lastName}" placeholder="Last name"/>
+                    <input type="text" id="searchPosition" name="position"  value="${search.position}" placeholder="Position"/>
+                    <div class="button-container">
+                        <button class="button w-100" type="button" onClick="clearSearch()">Clear</button>
+                        <button class="button submit w-100" type="submit">Search</button>
+                    </div>
+                </form:form>
+            </div>
             <table class="employee-table">
                 <thead>
                     <tr>

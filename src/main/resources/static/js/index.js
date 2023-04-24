@@ -15,6 +15,10 @@ function returnToList() {
     window.location = '/employees/list';
 }
 
+function addEmployee() {
+    window.location = '/employees/new';
+}
+
 function cancelAction() {
     window.history.go(-1);
 }

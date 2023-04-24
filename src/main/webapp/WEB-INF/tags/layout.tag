@@ -12,8 +12,8 @@
     <header class="header">
         <a href="/"><h2>GBS Employment System</h2></a>
         <nav>
-            <a href="/employees/list">View Employees</a>
-            <a href="/employees/new">Add Employee</a>
+            <a href="/employees/list">Employees</a>
+            <a href="/employees/compensation">Compensation</a>
         </nav>
     </header>
     <main class="main">
