@@ -1,7 +1,10 @@
 package com.tapioca.controller;
 
 import com.tapioca.entity.Compensation;
+import com.tapioca.entity.Employee;
 import com.tapioca.service.CompensationService;
+import com.tapioca.service.EmployeeService;
+import com.tapioca.utils.CompensationSearchCriteria;
 import com.tapioca.utils.CustomDateFormatter;
 import com.tapioca.utils.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @Controller
 public class CompensationController {
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @Autowired
     private CompensationService compensationService;
@@ -55,6 +58,31 @@ public class CompensationController {
         return "redirect:/compensation/?success";
     }
 
+    @GetMapping("/compensation/search/{id}")
+    public String displayCompensationHistorySearchPage(@PathVariable("id") Long employeeId, Model model) {
+        Employee employee = employeeService.retrieveEmployeeById(employeeId);
+
+        if (employee == null)
+            return "redirect:/employees/list?employeeNotFound";
+
+        model.addAttribute("employeeId", employeeId);
+        return "search-compensation";
+    }
+
+    @PostMapping("/compensation/search/{id}")
+    public String displayCompensationHistoryPage(@ModelAttribute("compensationSearch") CompensationSearchCriteria criteria, Model model) {
+        String errorMessage = getSearchCriteriaValidationResult(criteria);
+        model.addAttribute("employeeId", criteria.getEmployeeId());
+
+        if (errorMessage != null) {
+            model.addAttribute("errorMessage", errorMessage);
+            return "search-compensation";
+        }
+
+        model.addAttribute("monthlyCompensations", compensationService.calculateTotalAmountPerMonth(criteria));
+        return "view-compensation-history";
+    }
+
     /* Compensation-specific methods */
 
     @InitBinder
@@ -85,4 +113,13 @@ public class CompensationController {
         return null;
     }
 
+    public String getSearchCriteriaValidationResult(CompensationSearchCriteria criteria) {
+        if (criteria.getStartDate() == null)
+            return ErrorMessage.NULL_START_DATE.getMessage();
+        if (criteria.getEndDate() == null)
+            return ErrorMessage.NULL_END_DATE.getMessage();
+        if (criteria.getStartDate().isAfter(criteria.getEndDate()))
+            return ErrorMessage.INVALID_START_DATE.getMessage();
+        return null;
+    }
 }

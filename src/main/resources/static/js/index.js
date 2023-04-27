@@ -15,10 +15,18 @@ function returnToList() {
     window.location = '/employees/list';
 }
 
-function addEmployee() {
-    window.location = '/employees/new';
+function returnToEmployeeDetails(employeeId) {
+    window.location = `/employees/${employeeId}`;
 }
 
-function cancelAction() {
-    window.history.go(-1);
+function returnToCompensationSearch(employeeId) {
+    window.location = `/compensation/search/${employeeId}`;
+}
+
+function returnToIndex() {
+    window.location = '/';
+}
+
+function addEmployee() {
+    window.location = '/employees/new';
 }
