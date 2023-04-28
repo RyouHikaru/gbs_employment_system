@@ -27,10 +27,15 @@ public class CompensationServiceImpl implements CompensationService {
     }
 
     @Override
-    public List<MonthlyCompensation> calculateTotalAmountPerMonth(CompensationSearchCriteria criteria) {
+    public List<MonthlyCompensation> getTotalAmountPerMonthByCriteria(CompensationSearchCriteria criteria) {
         // Adjust endDate so that it will include the last day of the month
         LocalDate endDate = criteria.getEndDate();
         criteria.setEndDate(endDate.withDayOfMonth(endDate.lengthOfMonth()));
         return repository.findBySearchCriteria(criteria.getStartDate(), criteria.getEndDate(), criteria.getEmployeeId());
+    }
+
+    @Override
+    public List<Compensation> getCompensationsByDate(Long employeeId, LocalDate date) {
+        return repository.findByEmployeeIdAndDate(employeeId, date);
     }
 }

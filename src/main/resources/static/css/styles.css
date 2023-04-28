@@ -159,6 +159,10 @@ a:hover {
     width: 100px;
 }
 
+.w-125 {
+    width: 125px;
+}
+
 .submit {
 	background-color: var(--LIGHT_BLUE);
 }

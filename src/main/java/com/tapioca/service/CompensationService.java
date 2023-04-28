@@ -4,6 +4,7 @@ import com.tapioca.entity.Compensation;
 import com.tapioca.entity.MonthlyCompensation;
 import com.tapioca.utils.CompensationSearchCriteria;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CompensationService {
@@ -29,5 +30,14 @@ public interface CompensationService {
      * @param criteria - the Compensation Search criteria.
      * @return - the list of MonthlyCompensation matching the criteria
      */
-    List<MonthlyCompensation> calculateTotalAmountPerMonth(CompensationSearchCriteria criteria);
+    List<MonthlyCompensation> getTotalAmountPerMonthByCriteria(CompensationSearchCriteria criteria);
+
+    /**
+     * Method to retrieve Compensations by employee ID and date.
+     *
+     * @param employeeId - the employee ID.
+     * @param date - the date specified.
+     * @return - the list of Compensation by date.
+     */
+    List<Compensation> getCompensationsByDate(Long employeeId, LocalDate date);
 }

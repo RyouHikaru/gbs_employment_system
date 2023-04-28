@@ -27,6 +27,10 @@ function returnToIndex() {
     window.location = '/';
 }
 
+function returnToPreviousPage() {
+    history.back();
+}
+
 function addEmployee() {
     window.location = '/employees/new';
 }

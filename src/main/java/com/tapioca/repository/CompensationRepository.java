@@ -22,4 +22,9 @@ public interface CompensationRepository extends JpaRepository<Compensation, Long
             "AND compensation.employee.id = :employeeId " +
             "GROUP BY YEAR(compensation.date), MONTH(compensation.date)")
     List<MonthlyCompensation> findBySearchCriteria(LocalDate startDate, LocalDate endDate, Long employeeId);
+
+    @Query("SELECT compensation FROM Compensation compensation " +
+            "WHERE compensation.employee.id = :employeeId " +
+            "AND MONTH(compensation.date) = MONTH(:date)")
+    List<Compensation> findByEmployeeIdAndDate(Long employeeId, LocalDate date);
 }

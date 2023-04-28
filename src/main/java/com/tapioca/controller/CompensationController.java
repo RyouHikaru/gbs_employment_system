@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Month;
 
 @Controller
 public class CompensationController {
@@ -79,8 +81,23 @@ public class CompensationController {
             return "search-compensation";
         }
 
-        model.addAttribute("monthlyCompensations", compensationService.calculateTotalAmountPerMonth(criteria));
+        model.addAttribute("monthlyCompensations", compensationService.getTotalAmountPerMonthByCriteria(criteria));
         return "view-compensation-history";
+    }
+
+    @GetMapping("/compensation/search/breakdown")
+    public String displayCompensationBreakdown(@RequestParam(value = "employeeId", required = false) Long employeeId,
+                                               @RequestParam(value = "year", required = false) Integer year,
+                                               @RequestParam(value = "month", required = false) String month,
+                                               Model model) {
+
+        if (employeeId == null || year == null || month == null)
+            return "redirect:/";
+
+        LocalDate date = LocalDate.of(year, Month.valueOf(month.toUpperCase()), 1);
+
+        model.addAttribute("compensations", compensationService.getCompensationsByDate(employeeId, date));
+        return "view-compensation-breakdown";
     }
 
     /* Compensation-specific methods */

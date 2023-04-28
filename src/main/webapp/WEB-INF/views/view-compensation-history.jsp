@@ -10,8 +10,8 @@
         </c:if>
         <div class="table-container">
             <div class="button-container">
-                <button class="button submit w-100" type="button" onClick="returnToCompensationSearch(${employeeId})">Back</button>
-                <button class="button w-100" type="button" onClick="returnToIndex()">Home</button>
+                <button class="button submit w-125" type="button" onClick="returnToCompensationSearch(${employeeId})">Back to Search</button>
+                <button class="button w-125" type="button" onClick="returnToIndex()">Home</button>
             </div>
             <h3>Compensation History of Employee ${employeeId}</h3>
             <table class="monthly-comp-table">
@@ -29,7 +29,9 @@
                             <td>${monthlyCompensation.year}</td>
                             <td>${monthlyCompensation.month}</td>
                             <td>${monthlyCompensation.totalAmount}</td>
-                            <td><a href="#">View</a></td>
+                            <td>
+                                <a href="breakdown?employeeId=${employeeId}&year=${monthlyCompensation.year}&month=${monthlyCompensation.month}">View</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
