@@ -275,7 +275,8 @@ input:focus {
 	background-color: #42515f;
 }
 
-.employee-table td:nth-child(5) {
+.employee-table td:nth-child(5),
+.monthly-comp-table td:nth-child(5) {
 	text-align: center;
 }
 

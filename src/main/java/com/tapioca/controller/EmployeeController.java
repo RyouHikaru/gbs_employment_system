@@ -18,6 +18,11 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @GetMapping("/employees/**")
+    public String redirectToHome() {
+        return "redirect:/";
+    }
+
     @GetMapping("/")
     public String displayHomepage() {
         return "index";
@@ -59,7 +64,7 @@ public class EmployeeController {
         return "view-employees";
     }
 
-    @GetMapping("/employees/{id}")
+    @GetMapping("/employees/employee/{id}")
     public String displayEmployeeDetails(@PathVariable("id") Long id, Model model) {
         Employee employee = employeeService.retrieveEmployeeById(id);
 

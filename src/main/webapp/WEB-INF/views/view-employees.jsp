@@ -42,7 +42,7 @@
                             <td>${employee.firstName} ${employee.middleName} ${employee.lastName}</td>
                             <td>${employee.birthDate}</td>
                             <td>${employee.position}</td>
-                            <td><a href="/employees/${employee.id}">View</a></td>
+                            <td><a href="/employees/employee/${employee.id}">View</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

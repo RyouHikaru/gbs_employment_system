@@ -22,6 +22,7 @@
                         <th>Type</th>
                         <th>Amount</th>
                         <th>Description</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,7 @@
                             <td>${compensation.type}</td>
                             <td>${compensation.amount}</td>
                             <td>${compensation.description}</td>
+                            <td><a href="/compensation/edit/${param.employeeId}/${compensation.id}">View</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

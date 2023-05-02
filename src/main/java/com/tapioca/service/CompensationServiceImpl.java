@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompensationServiceImpl implements CompensationService {
@@ -37,5 +38,11 @@ public class CompensationServiceImpl implements CompensationService {
     @Override
     public List<Compensation> getCompensationsByDate(Long employeeId, LocalDate date) {
         return repository.findByEmployeeIdAndDate(employeeId, date);
+    }
+
+    @Override
+    public Compensation getCompensationById(Long id) {
+        Optional<Compensation> compensationOptional = repository.findById(id);
+        return compensationOptional.orElse(null);
     }
 }

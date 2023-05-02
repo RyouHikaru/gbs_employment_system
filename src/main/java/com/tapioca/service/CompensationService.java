@@ -40,4 +40,12 @@ public interface CompensationService {
      * @return - the list of Compensation by date.
      */
     List<Compensation> getCompensationsByDate(Long employeeId, LocalDate date);
+
+    /**
+     * Method to retrieve Compensation by ID.
+     *
+     * @param id - the compensation ID.
+     * @return - the retrieved Compensation.
+     */
+    Compensation getCompensationById(Long id);
 }

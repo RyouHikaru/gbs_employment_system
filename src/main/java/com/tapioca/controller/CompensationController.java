@@ -28,7 +28,12 @@ public class CompensationController {
     @Autowired
     private CompensationService compensationService;
 
-    @GetMapping("/compensation")
+    @GetMapping("/compensation/**")
+    public String redirectToHome() {
+        return "redirect:/";
+    }
+
+    @GetMapping("/compensation/new")
     public String displayAddCompensationPage(Model model) {
         model.addAttribute("compensation", new Compensation());
         return "add-compensation";
@@ -36,16 +41,24 @@ public class CompensationController {
 
     @PostMapping("/compensation/save")
     public String createOrUpdateCompensation(@Valid @ModelAttribute("compensation") Compensation compensation, BindingResult result, Model model) {
+        String URL = "add-compensation";
+        String redirectURL = "redirect:/compensation/new?success";
+
+        if (compensation.getId() != null) {
+            URL = "edit-compensation";
+            redirectURL = "redirect:/compensation/edit/" + compensation.getEmployee().getId() + "/" + compensation.getId() + "?success";
+        }
+
         if (compensation.getEmployee() == null) {
             model.addAttribute("errorMessage", ErrorMessage.INVALID_EMPLOYEE_ID.getMessage());
-            return "add-compensation";
+            return URL;
         }
 
         String[] fieldsToCheck = {"type", "amount", "date"};
         for (String field : fieldsToCheck) {
             if (result.hasFieldErrors(field)) {
                 model.addAttribute("errorMessage", result.getFieldError(field).getDefaultMessage());
-                return "add-compensation";
+                return URL;
             }
         }
 
@@ -53,15 +66,15 @@ public class CompensationController {
 
         if (errorMessage != null) {
             model.addAttribute("errorMessage", errorMessage);
-            return "add-compensation";
+            return URL;
         }
 
         compensationService.save(compensation);
-        return "redirect:/compensation/?success";
+        return redirectURL;
     }
 
-    @GetMapping("/compensation/search/{id}")
-    public String displayCompensationHistorySearchPage(@PathVariable("id") Long employeeId, Model model) {
+    @GetMapping("/compensation/search/{employeeId}")
+    public String displayCompensationHistorySearchPage(@PathVariable("employeeId") Long employeeId, Model model) {
         Employee employee = employeeService.retrieveEmployeeById(employeeId);
 
         if (employee == null)
@@ -71,7 +84,7 @@ public class CompensationController {
         return "search-compensation";
     }
 
-    @PostMapping("/compensation/search/{id}")
+    @PostMapping("/compensation/search/{employeeId}")
     public String displayCompensationHistoryPage(@ModelAttribute("compensationSearch") CompensationSearchCriteria criteria, Model model) {
         String errorMessage = getSearchCriteriaValidationResult(criteria);
         model.addAttribute("employeeId", criteria.getEmployeeId());
@@ -86,7 +99,7 @@ public class CompensationController {
     }
 
     @GetMapping("/compensation/search/breakdown")
-    public String displayCompensationBreakdown(@RequestParam(value = "employeeId", required = false) Long employeeId,
+    public String displayCompensationBreakdownPage(@RequestParam(value = "employeeId", required = false) Long employeeId,
                                                @RequestParam(value = "year", required = false) Integer year,
                                                @RequestParam(value = "month", required = false) String month,
                                                Model model) {
@@ -100,6 +113,24 @@ public class CompensationController {
         return "view-compensation-breakdown";
     }
 
+    @GetMapping("/compensation/edit/{employeeId}/{compensationId}")
+    public String displayCompensationDetailsPage(@PathVariable("employeeId") Long employeeId,
+                                                 @PathVariable("compensationId") Long compensationId,
+                                                 Model model) {
+        Employee employee = employeeService.retrieveEmployeeById(employeeId);
+
+        if (employee == null)
+            return "redirect:/employees/list?employeeNotFound";
+
+        Compensation compensation = compensationService.getCompensationById(compensationId);
+
+        if (compensation == null)
+            return "redirect:/";
+
+        model.addAttribute("compensation", compensation);
+        return "edit-compensation";
+    }
+
     /* Compensation-specific methods */
 
     @InitBinder
@@ -110,7 +141,7 @@ public class CompensationController {
     public String getValidationResult(Compensation compensation) {
         switch (compensation.getType()) {
             case SALARY -> {
-                if (compensationService.hasDuplicateSalaryEntry(compensation))
+                if (compensation.getId() == null && compensationService.hasDuplicateSalaryEntry(compensation))
                     return ErrorMessage.INVALID_SALARY.getMessage();
             }
             case BONUS, COMMISSION, ALLOWANCE -> {

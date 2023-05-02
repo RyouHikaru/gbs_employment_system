@@ -13,7 +13,7 @@
         <a href="/"><h2>GBS Employment System</h2></a>
         <nav>
             <a href="/employees/list">Employees</a>
-            <a href="/compensation">Compensation</a>
+            <a href="/compensation/new">Compensation</a>
         </nav>
     </header>
     <main class="main">

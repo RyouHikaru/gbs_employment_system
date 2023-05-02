@@ -16,7 +16,7 @@ function returnToList() {
 }
 
 function returnToEmployeeDetails(employeeId) {
-    window.location = `/employees/${employeeId}`;
+    window.location = `/employees/employee/${employeeId}`;
 }
 
 function returnToCompensationSearch(employeeId) {
