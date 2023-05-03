@@ -11,6 +11,12 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     boolean existsByFirstNameAndMiddleNameAndLastName(String firstName, String middleName, String lastName);
 
+    @Query("SELECT employee.id FROM Employee employee " +
+            "WHERE employee.firstName = :firstName " +
+            "AND employee.middleName = :middleName " +
+            "AND employee.lastName = :lastName")
+    Long findIdByFirstNameAndMiddleNameAndLastName(String firstName, String middleName, String lastName);
+
     @Query("SELECT employee FROM Employee employee " +
             "WHERE employee.firstName LIKE %:firstName% " +
             "AND employee.lastName LIKE %:lastName% " +

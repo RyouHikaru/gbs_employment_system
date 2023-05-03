@@ -44,9 +44,18 @@ public class EmployeeController {
             }
         }
 
-        if (employeeService.isEmployeeExisting(employee.getFirstName(), employee.getMiddleName(), employee.getLastName())) {
-            model.addAttribute("errorMessage", ErrorMessage.EMPLOYEE_EXISTS.getMessage());
-            return employee.getId() == null ? "add-employee" : "view-employee-details";
+        String firstName = employee.getFirstName();
+        String middleName = employee.getMiddleName();
+        String lastName = employee.getLastName();
+
+        if (employeeService.isEmployeeExisting(firstName, middleName, lastName)) {
+            Long retrievedId = employeeService.retrieveIdByName(firstName, middleName, lastName);
+
+            if (!retrievedId.equals(employee.getId())) {
+                model.addAttribute("errorMessage", ErrorMessage.EMPLOYEE_EXISTS.getMessage());
+                return employee.getId() == null ? "add-employee" : "view-employee-details";
+            }
+
         }
 
         employeeService.save(employee);

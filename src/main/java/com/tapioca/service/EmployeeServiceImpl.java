@@ -30,6 +30,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Long retrieveIdByName(String firstName, String middleName, String lastName) {
+        return repository.findIdByFirstNameAndMiddleNameAndLastName(firstName, middleName, lastName);
+    }
+
+    @Override
     public boolean isEmployeeExisting(String firstName, String middleName, String lastName) {
         return repository.existsByFirstNameAndMiddleNameAndLastName(firstName, middleName, lastName);
     }

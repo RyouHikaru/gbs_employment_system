@@ -27,6 +27,16 @@ public interface EmployeeService {
      */
     Employee retrieveEmployeeById(Long id);
 
+
+    /**
+     * Method to retrieve an Employee ID by name.
+     * @param firstName - first name.
+     * @param middleName - middle name.
+     * @param lastName - last name.
+     * @return - The retrieved ID of Employee.
+     */
+    Long retrieveIdByName(String firstName, String middleName, String lastName);
+
     /**
      * Method to validate if the Employee is already existing.
      * @param firstName - first name

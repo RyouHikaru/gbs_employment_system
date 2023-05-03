@@ -91,6 +91,20 @@ a:hover {
 	position: relative;
 }
 
+.quick-start {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--DARK_BLUE);
+    gap: 1rem;
+    padding: 1rem;
+	box-shadow: var(--FORM_SHADOW);
+    border-radius: 0.5rem;
+}
+
+.quick-start-link {
+    text-decoration: underline;
+}
+
 /* Form */
 .form {
 	display: flex;
